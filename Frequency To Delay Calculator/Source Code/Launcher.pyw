@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QApplication,QDialog
 from PyQt5 import uic as uic
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5 import QtMultimedia,QtLocation, QtPositioning
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -65,14 +65,25 @@ class Ui_Dialog(object):
         self.label_5 = QtWidgets.QLabel(Dialog)
         self.label_5.setGeometry(QtCore.QRect(290, 40, 51, 16))
         self.label_5.setObjectName("label_5")
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        """     
+        mapp = QtLocation.QGeoRoute
+        place = QtLocation.QPlace
+        place.setName("A sample")
+        location = QtPositioning.QGeoLocation
+        location.setCoordinate(QtPositioning.QGeoLocation(12.34, 56.78))
+        address = QtPositioning.QGeoAddress
+        address.setStreet("111 Norther Street")
+        location.setAddress(address)
+        place.setLocation(location)
+        """
+
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Delay to Frequency Calculator"))
-        self.lineEdit.setText(_translate("Dialog", "888"))
+        self.lineEdit.setText(_translate("Dialog", "1000"))
         self.plainTextEdit.setPlainText(_translate("Dialog", "ms"))
         self.pushButton.setText(_translate("Dialog", "Calculate"))
         self.label.setText(_translate("Dialog", "="))
@@ -95,6 +106,9 @@ class Ui_Dialog(object):
               prescaler = 1000
             elif (prescalerstring == "us"):
                 prescaler = 1000000
+
+            elif (prescalerstring == "ns"):
+                prescaler = 1000000000
             elif (prescalerstring == "s"):
                 prescaler = 1
             value = prescaler / (float(self.lineEdit.text()))
